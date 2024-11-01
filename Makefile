@@ -1,4 +1,4 @@
-xd: xd.c
-	gcc -g -Wall -o xd xd.c
+xtrad: xtrad.c
+	gcc -g -Wall -o xtrad xtrad.c
 clean:
-	rm -f xd
+	rm -f xtrad

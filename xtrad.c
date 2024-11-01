@@ -1,4 +1,4 @@
-#include "xd.h"
+#include "xtrad.h"
 #include <errno.h>
 #include <error.h>
 #include <stdio.h>
@@ -40,7 +40,7 @@ void changeDir(const char *name) {
         }
     }
     fclose(fp);
-    fprintf(stderr, "Directory '%s' not found\n", name);
+    fprintf(stderr, "Directory '%s' not found in %s\n", name, file);
 }
 
 void addDir(const char *name, const char *path) {
@@ -67,31 +67,31 @@ void listDirs() {
     fclose(fp);
 }
 
-void static usage(const char *name) {
-    fprintf(stderr, "Usage: %s <command>\n", name);
+void static usage() {
+    fprintf(stderr, "Usage: xd <command>\n");
     fprintf(stderr, "Commands:\n");
     fprintf(stderr, "  add <name> <path> - add a directory\n");
     fprintf(stderr, "  list              - list all directories\n");
     fprintf(stderr, "  <name>            - change to a directory\n");
-    fprintf(stderr, "  help              - show this help\n");
+    fprintf(stderr, "  help              - show this help");
 }
 
 int main(int argc, char *argv[]) {
     if (argc < 2) {
-        usage(argv[0]);
+        usage();
         return 1;
     }
     addDirsFile();
     if (strcmp(argv[1], "add") == 0) {
         if (argc != 4) {
-            fprintf(stderr, "Usage: %s add <name> <path>\n", argv[0]);
+            fprintf(stderr, "Usage: %s add <name> <path>", argv[0]);
             return 1;
         }
         addDir(argv[2], argv[3]);
     } else if (strcmp(argv[1], "list") == 0) {
         listDirs();
     } else if (strcmp(argv[1], "help") == 0) {
-        usage(argv[0]);
+        usage();
     } else {
         changeDir(argv[1]);
     }
