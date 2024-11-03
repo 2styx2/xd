@@ -7,3 +7,6 @@
     - specific dir file
 - Add error handling when trying to add a dir that does not exist
 - Add remove command
+
+## Installation & Usage
+'''./setup.sh'''
