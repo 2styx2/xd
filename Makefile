@@ -1,4 +1,14 @@
-xtrad: xtrad.c
-	gcc -g -Wall -o xtrad xtrad.c
+CC=gcc
+CFLAGS=-Wall
+DEPS = src/xtrad.h
+OBJ = src/xtrad.o
+
+%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+xtrad: $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS)
+
+.PHONY: clean
+
 clean:
-	rm -f xtrad
+	rm -f xtrad src/xtrad.o

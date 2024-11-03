@@ -17,7 +17,7 @@ detect_shell_profile() {
 
 # Compile the C program with the renamed binary
 echo "Compiling xtrad.c..."
-gcc "$TOOL_NAME".c -o "$TOOL_NAME" || {
+make || {
     echo "Compilation failed. Ensure gcc is installed and try again."
     exit 1
 }
@@ -33,7 +33,8 @@ sudo mv "$TOOL_NAME" "$INSTALL_PATH" || {
 detect_shell_profile
 
 # Add shell function to the shell profile if not already added
-if ! grep -q "function xd()" "$SHELL_PROFILE"; then
+output=$(grep "xd()" "$SHELL_PROFILE") 
+if [ -z "$output" ]; then
     echo "Adding xd function to $SHELL_PROFILE..."
     cat <<EOL >> "$SHELL_PROFILE"
 
