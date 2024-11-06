@@ -9,4 +9,4 @@
 - Add remove command
 
 ## Installation & Usage
-'''./setup.sh'''
+`./setup.sh`
