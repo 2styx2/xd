@@ -5,14 +5,25 @@
 #include <stdlib.h>
 #include <string.h>
 
-char *file;
+char* file;
 
-void addDirsFile() {
-    char *dirName = "/.xd_dirs";
-    file = (char *)malloc(strlen(getenv("HOME")) + strlen(dirName) + 1);
+static void usage()
+{
+    fprintf(stderr, "Usage: xd <command>\n");
+    fprintf(stderr, "Commands:\n");
+    fprintf(stderr, "  add <name> <path> - add a directory\n");
+    fprintf(stderr, "  list              - list all directories\n");
+    fprintf(stderr, "  <name>            - change to a directory\n");
+    fprintf(stderr, "  help              - show this help");
+}
+
+void addDirsFile()
+{
+    char* dirName = "/.xd_dirs";
+    file = (char*)malloc(strlen(getenv("HOME")) + strlen(dirName) + 1);
     strcpy(file, getenv("HOME"));
     strcat(file, dirName);
-    FILE *fp = fopen(file, "a");
+    FILE* fp = fopen(file, "a");
     if (fp == NULL) {
         fprintf(stderr, "Error opening file: %s\n", strerror(errno));
         exit(1);
@@ -20,8 +31,9 @@ void addDirsFile() {
     fclose(fp);
 }
 
-void changeDir(const char *name) {
-    FILE *fp = fopen(file, "r");
+void changeDir(const char* name)
+{
+    FILE* fp = fopen(file, "r");
     if (fp == NULL) {
         fprintf(stderr, "Error opening file: %s\n", strerror(errno));
         exit(1);
@@ -43,8 +55,9 @@ void changeDir(const char *name) {
     fprintf(stderr, "Directory '%s' not found in %s\n", name, file);
 }
 
-void addDir(const char *name, const char *path) {
-    FILE *fp = fopen(file, "a");
+void addDir(const char* name, const char* path)
+{
+    FILE* fp = fopen(file, "a");
     if (fp == NULL) {
         fprintf(stderr, "Error opening file: %s\n", strerror(errno));
         exit(1);
@@ -54,8 +67,9 @@ void addDir(const char *name, const char *path) {
     printf("Added directory %s with path %s\n", name, path);
 }
 
-void listDirs() {
-    FILE *fp = fopen(file, "r");
+void listDirs()
+{
+    FILE* fp = fopen(file, "r");
     if (fp == NULL) {
         fprintf(stderr, "Error opening file: %s\n", strerror(errno));
         exit(1);
@@ -67,16 +81,8 @@ void listDirs() {
     fclose(fp);
 }
 
-void static usage() {
-    fprintf(stderr, "Usage: xd <command>\n");
-    fprintf(stderr, "Commands:\n");
-    fprintf(stderr, "  add <name> <path> - add a directory\n");
-    fprintf(stderr, "  list              - list all directories\n");
-    fprintf(stderr, "  <name>            - change to a directory\n");
-    fprintf(stderr, "  help              - show this help");
-}
-
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[])
+{
     if (argc < 2) {
         usage();
         return 1;

@@ -17,7 +17,7 @@ detect_shell_profile() {
 
 # Compile the C program with the renamed binary
 echo "Compiling xtrad.c..."
-make || {
+./nob || {
     echo "Compilation failed. Ensure gcc is installed and try again."
     exit 1
 }
