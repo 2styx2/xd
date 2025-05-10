@@ -1,4 +1,7 @@
 ## Ch**X**nge Dir
+Make your shortcuts to change to any dir. Works by getting the path out
+of the config file of dirs then printing it. Then the function made in
+shell config file will call the chdir system call.
 
 ## TODO
 - Directory bookmarking(add the current dir to dirs file)
@@ -11,3 +14,4 @@
 
 ## Installation & Usage
 `./setup.sh`
+ - use sudo to move bin

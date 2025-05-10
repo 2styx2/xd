@@ -1,10 +1,10 @@
 #!/bin/zsh
 
 # Define variables
-TOOL_NAME="xtrad"  # Renamed binary
+TOOL_NAME="xtrad"  # binary
 INSTALL_PATH="/usr/local/bin/$TOOL_NAME"
-CONFIG_FILE="$HOME/.goto_dirs"
-SHELL_PROFILE="$HOME/.zshrc"  # Change to ~/.zshrc for zsh users
+CONFIG_FILE="$HOME/.xd_dirs"
+SHELL_PROFILE="$HOME/.zshrc"  # Change for other sh users
 
 # Function to check the user's shell and update profile file accordingly
 detect_shell_profile() {
@@ -17,7 +17,7 @@ detect_shell_profile() {
 
 # Compile the C program with the renamed binary
 echo "Compiling xtrad.c..."
-./nob || {
+make || {
     echo "Compilation failed. Ensure gcc is installed and try again."
     exit 1
 }
